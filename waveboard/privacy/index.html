@@ -84,12 +84,14 @@
         <h2>MICROPHONE</h2>
         <br>
         <p>Two of Waveboard's components — the Listener and the Pitch detector — turn
-        live sound into control signals for your patches. If you use them, Waveboard
-        asks iOS for permission to use the microphone.</p>
+        live sound into control signals for your patches. Waveboard's audio engine opens
+        the audio input when the app starts so those components are ready to use, so iOS
+        will ask your permission to use the microphone the first time you launch it.</p>
         <br>
-        <p>That audio is analysed on your device, in the moment, as part of the audio
-        engine. It is never recorded to a file, never stored, and never leaves your
-        iPad. If you decline the permission, the rest of the app works normally.</p>
+        <p>That audio is analysed on your device, in the moment, inside the audio engine.
+        It is never recorded to a file, never stored, and never leaves your iPad. If you
+        decline the permission, the Listener and Pitch detector simply receive no
+        sound.</p>
         <br>
         <br>
         <h2>BLUETOOTH</h2>
