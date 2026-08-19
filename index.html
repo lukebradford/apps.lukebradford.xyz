@@ -44,7 +44,7 @@
             }
             h1 {
                 font-family: Helvetica, sans-serif;
-                font-size: 15.0pt;
+                font-size: 24.0pt;
                 font-weight: 600;
                 letter-spacing: 0.5pt;
                 text-align: center;
@@ -104,18 +104,18 @@
             }
             .badge a {
                 display: inline-block;
-                transform: translateY(0) scale(1);
-                filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
-                backface-visibility: hidden;
-                transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.2s ease;
+                border-radius: 8px;
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                will-change: transform;
             }
             .badge a:hover {
-                transform: translateY(-2px) scale(1.03);
-                filter: drop-shadow(0 3px 9px rgba(255, 255, 255, 0.28));
+                transform: translateY(-2px);
+                box-shadow: 0 4px 16px rgba(255, 255, 255, 0.28);
             }
             .badge a:active {
-                transform: translateY(-1px) scale(1.01);
-                filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.2));
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
             }
             .support-link {
                 color: #888;
@@ -142,6 +142,8 @@
             <h2>Symmetry Lab</h2>
         </div>
         <br>
+        <p class="badge"><a href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio"><img src="app-store-badge.svg" alt="Download Symmetry Lab on the App Store"></a></p>
+        <br>
         <p>A kaleidoscopic drawing app: create beautiful symmetrical art with just your
         finger. A few strokes and a strict rule of symmetry become an intricate
         pattern — no artistic skill required. Launched in 2009 and completely
@@ -150,13 +152,13 @@
         <p>Free to download, with a subscription for the full version. More at
         <a href="https://symmetrylab.app">symmetrylab.app</a>.</p>
         <br>
-        <p class="badge"><a href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio"><img src="app-store-badge.svg" alt="Download Symmetry Lab on the App Store"></a></p>
-        <br>
         <br>
         <div class="apphead">
             <img src="icon-quarc.png" alt="Quarc app icon">
             <h2>Quarc</h2>
         </div>
+        <br>
+        <p class="badge"><a href="https://apps.apple.com/us/app/quarc/id6760784173"><img src="app-store-badge.svg" alt="Download Quarc on the App Store"></a></p>
         <br>
         <p>The classic falling-block puzzle, reimagined with curved pieces: every shape
         is built from concave and convex arcs, from circles to four-pointed stars.</p>
@@ -165,24 +167,13 @@
         Challenge mode, backgrounds, and themes. No subscriptions, no ads, no loot boxes — ever.
         More at <a href="https://lukebradford.github.io/quarc/">the Quarc site</a>.</p>
         <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/quarc/id6760784173"><img src="app-store-badge.svg" alt="Download Quarc on the App Store"></a></p>
-        <br>
-        <br>
-        <div class="apphead">
-            <img src="icon-megalith.png" alt="Megalith app icon">
-            <h2>Megalith</h2>
-        </div>
-        <br>
-        <p>Turns a handful of words into a striking, block-justified text poster — the
-        look of vintage justified typography, set in seconds. Free.</p>
-        <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741"><img src="app-store-badge.svg" alt="Download Megalith on the App Store"></a></p>
-        <br>
         <br>
         <div class="apphead">
             <img src="icon-textile.png" alt="Textile app icon">
             <h2>Textile</h2>
         </div>
+        <br>
+        <p class="badge"><a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165"><img src="app-store-badge.svg" alt="Download Textile on the App Store"></a></p>
         <br>
         <p>Textile is the iPhone notes app for people who just want an iPhone notes app.
         No login. No cloud accounts to manage. No half-built checklists. Just elegant
@@ -190,7 +181,16 @@
         <br>
         <p><a class="support-link" href="textile/">Textile support</a></p>
         <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165"><img src="app-store-badge.svg" alt="Download Textile on the App Store"></a></p>
+        <br>
+        <div class="apphead">
+            <img src="icon-megalith.png" alt="Megalith app icon">
+            <h2>Megalith</h2>
+        </div>
+        <br>
+        <p class="badge"><a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741"><img src="app-store-badge.svg" alt="Download Megalith on the App Store"></a></p>
+        <br>
+        <p>Turns a handful of words into a striking, block-justified text poster — the
+        look of vintage justified typography, set in seconds. Free.</p>
         <br>
         <br>
         <br>
