@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A small family of design-led apps for iPhone and iPad, built around geometry, color, and restraint. By Luke Bradford.">
-        <meta name="theme-color" content="#000000">
+        <meta name="theme-color" content="#ffffff">
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114.png" />
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72.png" />
@@ -36,17 +36,22 @@
                 text-align: center;
                 font-size: 14pt;
                 line-height: 20pt;
-                background-color: #000000;
-                color: #ffffff;
+                background-color: #ffffff;
+                color: #1a1a1a;
             }
             a {
-                color: #ffffff;
+                color: #1a1a1a;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
             }
             h1 {
-                font-family: Helvetica, sans-serif;
-                font-size: 24.0pt;
-                font-weight: 600;
-                letter-spacing: 0.5pt;
+                font-family: league, Helvetica, sans-serif;
+                font-size: 60.0pt;
+                font-weight: normal;
+                letter-spacing: 0.0pt;
+                line-height: 1.05;
                 text-align: center;
                 margin: 0 auto;
             }
@@ -73,23 +78,36 @@
             }
             p.subtitle {
                 text-align: center;
+                color: #6f6f6f;
+                font-size: 12pt;
+                letter-spacing: 0.5pt;
             }
             .apphead {
                 max-width: 672px;
                 margin: 0 auto;
                 padding-left: 20px;
                 padding-right: 20px;
-                display: flex;
-                align-items: center;
                 text-align: left;
             }
-            .apphead img {
+            .apphead-link {
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+                color: inherit;
+                transition: transform 0.2s ease;
+            }
+            .apphead-link img {
                 width: 52px;
                 height: 52px;
                 border-radius: 12px;
                 margin-right: 16px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                            0 1px 2px rgba(0, 0, 0, 0.1),
+                            0 4px 10px rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.2s ease, transform 0.12s ease;
             }
-            .apphead h2 {
+            .apphead-link h2 {
                 padding: 0;
                 margin: 0;
                 font-family: Helvetica, sans-serif;
@@ -98,51 +116,53 @@
                 letter-spacing: 0.0pt;
                 line-height: 1;
             }
-            .badge img {
-                height: 40px;
-                display: block;
-            }
-            .badge a {
-                display: inline-block;
-                border-radius: 8px;
-                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                will-change: transform;
-            }
-            .badge a:hover {
+            .apphead-link:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 16px rgba(255, 255, 255, 0.28);
+                text-decoration: none;
             }
-            .badge a:active {
-                transform: translateY(-1px);
-                box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+            .apphead-link:hover img {
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                            0 4px 8px rgba(0, 0, 0, 0.14),
+                            0 10px 22px rgba(0, 0, 0, 0.16);
+            }
+            .apphead-link:active {
+                transform: translateY(0);
+            }
+            .apphead-link:active img {
+                transform: scale(0.95);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                            0 1px 2px rgba(0, 0, 0, 0.12);
             }
             .support-link {
-                color: #888;
+                color: #6f6f6f;
                 font-size: 12pt;
                 text-decoration: none;
                 transition: color 0.2s ease;
             }
             .support-link:hover {
-                color: #ffffff;
+                color: #1a1a1a;
+                text-decoration: none;
             }
         </style>
     </head>
     <body>
         <br>
         <br>
-        <h1>iOS apps by Luke Bradford</h1>
+        <h1>Luke Bradford</h1>
+        <br>
+        <p class="subtitle">Apps for iOS</p>
+        <br>
         <br>
         <p>Hi, I’m Luke. I’ve been building apps for iPhone and iPad since 2009. Every
         project is a labor of love, and most are free or free to try.</p>
         <br>
         <br>
         <div class="apphead">
-            <img src="icon-symmetry-lab.png" alt="Symmetry Lab app icon">
-            <h2>Symmetry Lab</h2>
+            <a class="apphead-link" href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio">
+                <img src="icon-symmetry-lab.png" alt="">
+                <h2>Symmetry Lab</h2>
+            </a>
         </div>
-        <br>
-        <p class="badge"><a href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio"><img src="app-store-badge.svg" alt="Download Symmetry Lab on the App Store"></a></p>
         <br>
         <p>A kaleidoscopic drawing app: create beautiful symmetrical art with just your
         finger. A few strokes and a strict rule of symmetry become an intricate
@@ -154,11 +174,11 @@
         <br>
         <br>
         <div class="apphead">
-            <img src="icon-quarc.png" alt="Quarc app icon">
-            <h2>Quarc</h2>
+            <a class="apphead-link" href="https://apps.apple.com/us/app/quarc/id6760784173">
+                <img src="icon-quarc.png" alt="">
+                <h2>Quarc</h2>
+            </a>
         </div>
-        <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/quarc/id6760784173"><img src="app-store-badge.svg" alt="Download Quarc on the App Store"></a></p>
         <br>
         <p>The classic falling-block puzzle, reimagined with curved pieces: every shape
         is built from concave and convex arcs, from circles to four-pointed stars.</p>
@@ -169,11 +189,11 @@
         <br>
         <br>
         <div class="apphead">
-            <img src="icon-textile.png" alt="Textile app icon">
-            <h2>Textile</h2>
+            <a class="apphead-link" href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165">
+                <img src="icon-textile.png" alt="">
+                <h2>Textile</h2>
+            </a>
         </div>
-        <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165"><img src="app-store-badge.svg" alt="Download Textile on the App Store"></a></p>
         <br>
         <p>Textile is the iPhone notes app for people who just want an iPhone notes app.
         No login. No cloud accounts to manage. No half-built checklists. Just elegant
@@ -183,11 +203,11 @@
         <br>
         <br>
         <div class="apphead">
-            <img src="icon-megalith.png" alt="Megalith app icon">
-            <h2>Megalith</h2>
+            <a class="apphead-link" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">
+                <img src="icon-megalith.png" alt="">
+                <h2>Megalith</h2>
+            </a>
         </div>
-        <br>
-        <p class="badge"><a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741"><img src="app-store-badge.svg" alt="Download Megalith on the App Store"></a></p>
         <br>
         <p>Turns a handful of words into a striking, block-justified text poster — the
         look of vintage justified typography, set in seconds. Free.</p>
