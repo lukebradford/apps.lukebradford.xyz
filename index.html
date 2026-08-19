@@ -101,6 +101,27 @@
                 height: 40px;
                 display: block;
             }
+            .badge a {
+                display: inline-block;
+                transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.2s ease;
+            }
+            .badge a:hover {
+                transform: translateY(-2px) scale(1.03);
+                filter: drop-shadow(0 3px 9px rgba(255, 255, 255, 0.28));
+            }
+            .badge a:active {
+                transform: translateY(-1px) scale(1.01);
+                filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.2));
+            }
+            .support-link {
+                color: #888;
+                font-size: 12pt;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+            .support-link:hover {
+                color: #ffffff;
+            }
         </style>
     </head>
     <body>
@@ -162,8 +183,11 @@
             <h2>Textile</h2>
         </div>
         <br>
-        <p>The iPhone notes app for people who actually want to write. No login, no
-        cloud accounts to manage. Free.</p>
+        <p>Textile is the iPhone notes app for people who just want an iPhone notes app.
+        No login. No cloud accounts to manage. No half-built checklists. Just elegant
+        typography and simple, rock-solid functionality.</p>
+        <br>
+        <p><a class="support-link" href="textile/">Textile support</a></p>
         <br>
         <p class="badge"><a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165"><img src="app-store-badge.svg" alt="Download Textile on the App Store"></a></p>
         <br>

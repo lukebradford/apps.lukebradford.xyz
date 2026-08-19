@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../apple-touch-icon-152x152.png" />
     <link rel="icon" type="image/png" href="../favicon-196x196.png" sizes="196x196" />
     <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
-    <title>Textile — Support</title>
+    <title>Textile</title>
     <style>
         * {
             margin: 0;
@@ -37,7 +37,7 @@
 
         header h1 {
             font-size: 2.75rem;
-            font-weight: 400;
+            font-weight: 700;
             letter-spacing: 0.02em;
             color: #1a1a1a;
             margin-top: 0.5rem;
@@ -47,6 +47,29 @@
             font-size: 1.05rem;
             color: #777;
             margin-top: 0.5rem;
+        }
+
+        header .store-badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.2s ease;
+        }
+
+        header .store-badge img {
+            height: 2.75rem;
+            width: auto;
+            display: block;
+        }
+
+        header .store-badge:hover {
+            transform: translateY(-2px) scale(1.03);
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
+        }
+
+        header .store-badge:active {
+            transform: translateY(-1px) scale(1.01);
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.16));
         }
 
         main {
@@ -66,8 +89,6 @@
             font-weight: 400;
             color: #1a1a1a;
             margin-bottom: 0.85rem;
-            border-bottom: 1px solid #e8e4dc;
-            padding-bottom: 0.4rem;
         }
 
         p, li {
@@ -145,6 +166,7 @@
         <img src="icon-textile.png" alt="Textile">
         <h1>Textile</h1>
         <p class="tagline">A distraction-free notepad for iOS</p>
+        <a class="store-badge" href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165"><img src="../app-store-badge.svg" alt="Download Textile on the App Store"></a>
     </header>
     <main>
         <section>
