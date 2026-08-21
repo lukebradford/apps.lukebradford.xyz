@@ -99,7 +99,7 @@
                 transition: transform 0.2s ease;
             }
             .icon-row a:hover {
-                transform: translateY(-2px);
+                transform: translateY(-5px);
                 text-decoration: none;
             }
             .icon-row a:active {
@@ -110,7 +110,6 @@
                 width: 52px;
                 height: 52px;
                 border-radius: 12px;
-                border: 1px solid rgba(0, 0, 0, 0.12);
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
@@ -124,13 +123,11 @@
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
-                            inset 0 -2px 1.5px rgba(255, 255, 255, 0.28),
-                            inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-                            0 4px 8px rgba(0, 0, 0, 0.14),
-                            0 10px 22px rgba(0, 0, 0, 0.16);
+                            0 5px 0 0 var(--edge, rgba(0, 0, 0, 0.55)),
+                            0 7px 8px -1px rgba(0, 0, 0, 0.34);
             }
             .icon-row a:active img {
-                transform: scale(0.95);
+                transform: none;
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
@@ -138,6 +135,12 @@
                             inset 0 0 0 1px rgba(255, 255, 255, 0.05),
                             0 1px 2px rgba(0, 0, 0, 0.12);
             }
+            /* Per-app color of the 3D button edge revealed on hover */
+            .edge-symmetry  { --edge: #5f79db; } /* lighter blue (more blue than purple) */
+            .edge-quarc     { --edge: #726ce2; } /* slightly paler moon purple */
+            .edge-textile   { --edge: #cacace; } /* lighter gray */
+            .edge-megalith  { --edge: #f7cc8d; } /* lighter orange */
+            .edge-waveboard { --edge: #617cbc; } /* blue from the Waveboard icon */
             .apphead {
                 max-width: 672px;
                 margin: 0 auto;
@@ -157,7 +160,6 @@
                 height: 52px;
                 border-radius: 12px;
                 margin-right: 16px;
-                border: 1px solid rgba(0, 0, 0, 0.12);
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
@@ -177,23 +179,21 @@
                 line-height: 1;
             }
             .apphead-link:hover {
-                transform: translateY(-2px);
+                transform: translateY(-5px);
                 text-decoration: none;
             }
             .apphead-link:hover img {
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
-                            inset 0 -2px 1.5px rgba(255, 255, 255, 0.28),
-                            inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-                            0 4px 8px rgba(0, 0, 0, 0.14),
-                            0 10px 22px rgba(0, 0, 0, 0.16);
+                            0 5px 0 0 var(--edge, rgba(0, 0, 0, 0.55)),
+                            0 7px 8px -1px rgba(0, 0, 0, 0.34);
             }
             .apphead-link:active {
                 transform: translateY(0);
             }
             .apphead-link:active img {
-                transform: scale(0.95);
+                transform: none;
                 box-shadow: inset 0 2px 1.5px rgba(255, 255, 255, 0.80),
                             inset 1.5px 0 1px rgba(255, 255, 255, 0.40),
                             inset -1.5px 0 1px rgba(255, 255, 255, 0.18),
@@ -219,19 +219,19 @@
         <h1>Luke Bradford</h1>
         <p class="subtitle">Beautiful apps for iOS</p>
         <div class="icon-row">
-            <a href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio" aria-label="Symmetry Lab on the App Store">
+            <a class="edge-symmetry" href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio" aria-label="Symmetry Lab on the App Store">
                 <img src="icon-symmetry-lab.png" alt="">
             </a>
-            <a href="https://apps.apple.com/us/app/quarc/id6760784173" aria-label="Quarc on the App Store">
+            <a class="edge-quarc" href="https://apps.apple.com/us/app/quarc/id6760784173" aria-label="Quarc on the App Store">
                 <img src="icon-quarc.png" alt="">
             </a>
-            <a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165" aria-label="Textile on the App Store">
+            <a class="edge-textile" href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165" aria-label="Textile on the App Store">
                 <img src="icon-textile.png" alt="">
             </a>
-            <a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741" aria-label="Megalith on the App Store">
+            <a class="edge-megalith" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741" aria-label="Megalith on the App Store">
                 <img src="icon-megalith.png" alt="">
             </a>
-            <a href="waveboard/" aria-label="Waveboard manual and support">
+            <a class="edge-waveboard" href="waveboard/" aria-label="Waveboard manual and support">
                 <img src="icon-waveboard.png" alt="">
             </a>
         </div>
@@ -242,7 +242,7 @@
         <br>
         <br>
         <div class="apphead">
-            <a class="apphead-link" href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio">
+            <a class="apphead-link edge-symmetry" href="https://apps.apple.com/app/id327084738?pt=264080&amp;ct=web_portfolio&amp;mt=8" data-ct="web_portfolio">
                 <img src="icon-symmetry-lab.png" alt="">
                 <h2>Symmetry Lab</h2>
             </a>
@@ -258,7 +258,7 @@
         <br>
         <br>
         <div class="apphead">
-            <a class="apphead-link" href="https://apps.apple.com/us/app/quarc/id6760784173">
+            <a class="apphead-link edge-quarc" href="https://apps.apple.com/us/app/quarc/id6760784173">
                 <img src="icon-quarc.png" alt="">
                 <h2>Quarc</h2>
             </a>
@@ -273,7 +273,7 @@
         <br>
         <br>
         <div class="apphead">
-            <a class="apphead-link" href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165">
+            <a class="apphead-link edge-textile" href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165">
                 <img src="icon-textile.png" alt="">
                 <h2>Textile</h2>
             </a>
@@ -287,7 +287,7 @@
         <br>
         <br>
         <div class="apphead">
-            <a class="apphead-link" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">
+            <a class="apphead-link edge-megalith" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">
                 <img src="icon-megalith.png" alt="">
                 <h2>Megalith</h2>
             </a>
@@ -302,7 +302,7 @@
         <br>
         <br>
         <div class="apphead">
-            <a class="apphead-link" href="waveboard/">
+            <a class="apphead-link edge-waveboard" href="waveboard/">
                 <img src="icon-waveboard.png" alt="">
                 <h2>Waveboard</h2>
             </a>
@@ -313,7 +313,7 @@
         way you want it — or start from one of thirty built-in patches and rewire from
         there. Everything runs on your own device: no account, no network.</p>
         <br>
-        <p><a class="support-link" href="waveboard/">Waveboard manual &amp; support</a></p>
+        <p><a class="support-link" href="waveboard/">Waveboard support</a></p>
         <br>
         <br>
         <br>
