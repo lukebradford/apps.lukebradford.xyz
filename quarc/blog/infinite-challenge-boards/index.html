@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How QUARC creates infinite challenge mode boards — QUARC</title>
+    <meta name="description" content="How QUARC generates a fresh daily challenge board on every device with no server: a deterministic date-seed, a constrained random walk, drops played through the real collision system, and gaps carved as the complement of pieces.">
+    <meta name="author" content="Luke Bradford">
+    <link rel="canonical" href="https://apps.lukebradford.xyz/quarc/blog/infinite-challenge-boards/">
+    <link rel="icon" type="image/png" href="../../AppIcon.png">
+
+    <!-- Social / link previews — this post is meant to be shared -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://apps.lukebradford.xyz/quarc/blog/infinite-challenge-boards/">
+    <meta property="og:title" content="How QUARC creates infinite challenge mode boards">
+    <meta property="og:description" content="QUARC’s daily challenge is the same board for everyone on Earth and needs no server — because the whole thing unfolds from a single integer.">
+    <meta property="og:image" content="https://apps.lukebradford.xyz/quarc/press/assets/quarc-app-icon-1024.png">
+    <meta property="article:published_time" content="2026-05-31">
+    <meta property="article:author" content="Luke Bradford">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How QUARC creates infinite challenge mode boards">
+    <meta name="twitter:description" content="How QUARC grows a fresh daily puzzle from a single integer — no server, same board for everyone.">
+    <meta name="twitter:image" content="https://apps.lukebradford.xyz/quarc/press/assets/quarc-app-icon-1024.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How QUARC creates infinite challenge mode boards",
+        "description": "How QUARC generates its daily challenge board from a single deterministic date-seed, with no server.",
+        "datePublished": "2026-05-31",
+        "author": { "@type": "Person", "name": "Luke Bradford", "url": "https://apps.lukebradford.xyz/quarc/" },
+        "mainEntityOfPage": "https://apps.lukebradford.xyz/quarc/blog/infinite-challenge-boards/",
+        "image": "https://apps.lukebradford.xyz/quarc/press/assets/quarc-app-icon-1024.png"
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000;
+            --fg: #d9d9e2;
+            --bright: #f3f3f8;
+            --muted: #8a8a96;
+            --dim: #555;
+            --line: #1c1c24;
+            --card: #0b0b0f;
+            --accent: #ffffff;
+            /* QUARC piece palette, pulled from the game */
+            --royal: #4733e0;
+            --peri: #6e7bf2;
+            --sky: #5aa0e6;
+            --cyan: #bdebf2;
+            --gold: #e0b23a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .topnav {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 0;
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .topnav a { color: var(--muted); }
+        .topnav a:hover { color: var(--bright); text-decoration: none; }
+
+        article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 4rem;
+        }
+
+        .post-head { padding: 1.5rem 0 1rem; }
+        .post-head .kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.1rem;
+        }
+        h1 {
+            font-size: 2.3rem;
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--bright);
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+        .dek {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: var(--muted);
+            font-weight: 400;
+        }
+        .byline {
+            margin-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.9rem;
+            color: var(--dim);
+        }
+        .byline strong { color: var(--fg); font-weight: 500; }
+
+        article p { margin: 1.3rem 0; font-size: 1.075rem; }
+        article p.lead { font-size: 1.18rem; color: var(--bright); }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--bright);
+            margin: 2.8rem 0 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        strong { color: var(--bright); font-weight: 600; }
+        em { color: #e8e8ef; }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.9em;
+            background: #141420;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            padding: 0.1em 0.4em;
+            color: var(--cyan);
+        }
+
+        /* ---------- figures ---------- */
+        figure { margin: 2.4rem 0; text-align: center; }
+        .pair {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .pair .cell { width: 150px; max-width: 32vw; }
+        svg.fig { width: 100%; height: auto; display: block; }
+        .skyline { max-width: 480px; margin-left: auto; margin-right: auto; }
+        .shot img {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+        }
+        .pair .lab { margin-top: 0.7rem; }
+        .pair .lab .sign { color: var(--bright); font-weight: 600; font-size: 0.95rem; }
+        .pair .lab .name { color: var(--muted); font-size: 0.85rem; }
+        figcaption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--muted);
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ---------- pipeline strip ---------- */
+        .pipeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .pipeline .step {
+            flex: 1 1 0;
+            min-width: 104px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 0.85rem 0.65rem;
+            text-align: center;
+        }
+        .pipeline .step .n {
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        .pipeline .step .t {
+            color: var(--bright);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 0.15rem;
+        }
+        .pipeline .step .d {
+            color: var(--muted);
+            font-size: 0.76rem;
+            line-height: 1.4;
+            margin-top: 0.3rem;
+        }
+
+        /* ---------- end / author card ---------- */
+        .endmark {
+            text-align: center;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin: 2.5rem 0 0;
+            letter-spacing: 0.3em;
+        }
+        .author {
+            margin-top: 3rem;
+            padding: 1.6rem 1.75rem;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            font-size: 0.98rem;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+        .author strong { color: var(--bright); }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            font-size: 0.85rem;
+            color: var(--dim);
+            border-top: 1px solid var(--line);
+        }
+        footer a { color: var(--muted); }
+
+        @media (max-width: 520px) {
+            h1 { font-size: 1.85rem; }
+            .dek { font-size: 1.08rem; }
+            article p { font-size: 1.02rem; }
+            .pair { gap: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="topnav">
+        <a href="../">← QUARC Blog</a>
+    </nav>
+
+    <article>
+        <header class="post-head">
+            <p class="kicker">Design Notes</p>
+            <h1>How QUARC creates infinite challenge mode boards</h1>
+            <p class="dek">QUARC’s daily challenge is the same board for everyone on Earth, needs no server, and can be regenerated for any date past or future — because the whole thing unfolds from a single integer.</p>
+            <p class="byline">By <strong>Luke Bradford</strong> &nbsp;·&nbsp; May 31, 2026 &nbsp;·&nbsp; 6 min read</p>
+        </header>
+
+        <p class="lead">Classic QUARC starts with an empty board. Challenge mode instead populates the board with a randomized landscape of curved rubble, as if an alien has been there playing (badly) before you. It’s a new arrangement every day, the same one for every player, resetting at midnight Greenwich Mean Time. The obvious way to ship that is a server quietly handing out hand-made puzzles. QUARC has no server and no library of puzzles. The board for any given day is computed, on your device, from one number.</p>
+
+        <h2>The number is the date</h2>
+
+        <p>The daily seed is simple: take the seconds since 1970 and divide by the number of seconds in a day.</p>
+
+        <p style="text-align:center;"><code>seed = Int(Date().timeIntervalSince1970) / 86400</code></p>
+
+        <p>That’s just &ldquo;how many days since the epoch,&rdquo; measured in UTC — so the whole world rolls over to a new board at the same instant, which (critically) is exactly when the leaderboard resets too. Feed that integer into a deterministic pseudorandom generator and every &ldquo;random&rdquo; decision made afterward is fixed in advance. The same day gives you the same seed, the same stream of numbers, and the same board — on every phone, with no network involved. We can render the board for New Year’s Eve, or an arbitrary Tuesday in 1976, by changing nothing but the integer.</p>
+
+        <p>Since every seemingly random decision is deterministic given the seed, the board generator is a pure function from one integer to a finished board.</p>
+
+        <h2>The algorithm</h2>
+
+        <p>A generator can do real damage if it just scatters shapes across the board. Curved pieces only fit where their curves are complementary — a convex curve fits into a concave curve, and nowhere else — so a careless arrangement of shapes produces boards that are impossible. Some are visually obvious if you’ve played the game, like sharp exposed vertical or horizontal edges that never happen naturally, but others are more subtle, like inaccessible holes larger than a single shape, which can never be filled.</p>
+
+        <p>QUARC was built with heavy use of Claude Code, but this was a case where it felt impossible to get Claude to understand the ideal state, and the constraints it had to meet, which felt easy for me to visualize after playing the classic mode of the game over and over again. After fighting many failure modes, in the end I sat down with a notebook and thought through the algorithm below, with illustrations, before implementing it.</p>
+
+        <p>It runs as a four-stage pipeline, each stage pulling from that single stream of numbers:</p>
+
+        <figure>
+            <div class="pipeline">
+                <div class="step"><div class="n">Phase 1</div><div class="t">Contour</div><div class="d">Create the landscape</div></div>
+                <div class="step"><div class="n">Phase 2</div><div class="t">Drops</div><div class="d">Let pieces fall</div></div>
+                <div class="step"><div class="n">Phase 3</div><div class="t">Gaps</div><div class="d">Carve out empty space</div></div>
+                <div class="step"><div class="n">Phase 4</div><div class="t">Colorize</div><div class="d">Paint the board</div></div>
+            </div>
+        </figure>
+
+        <h2>1. Contour — drawing a smooth skyline</h2>
+
+        <p>First the generator walks across the board’s ten columns and lays down the surface of the landscape: a height and a curve for each column. It’s a constrained random walk. At every column it either holds its height and flips the curve around, or steps up or down a row and keeps it facing the same direction — and which one it does is governed by a pattern chosen for the day: flat, diagonal, a zigzag at one of three wavelengths, or random. Everything below the surface is made solid at this step.</p>
+
+        <figure class="shot">
+            <img src="../phase_shots/step1_contour.png" alt="Phase 1: a smooth curved skyline carved across the board, solid beneath the surface and empty above, with no vertical seams.">
+            <figcaption>Phase 1: the surface is a constrained walk across the columns, one arc per step — convex (bulging up) and concave (scooped in) — flowing continuously, with no vertical seams. Everything beneath is solid.</figcaption>
+        </figure>
+
+        <p>The constraints are tight here. The leftmost column always opens facing inward and the rightmost is forced to close facing inward, so the silhouette meets both screen edges cleanly, leaving no narrow gaps. Two neighboring columns are never allowed to sit at the same height facing the same way, because that opens an impossible vertical seam.</p>
+
+        <h2>2. Drops — let pieces fall</h2>
+
+        <p>Onto that surface the generator drops extra pieces to build complexity and texture without introducing impossible holes. It picks a band of columns, how many pieces to drop in each one (from zero to five), and a shape theme — all one shape, one shape per column, one per row, with or without rotation, or purely random. Then, crucially, every piece falls through the actual physics of the game: it finds its true landing row, and if that landing would create a collision of convex curves — which destroys the piece in actual gameplay — the piece is rejected and a different shape is tried, up to twenty times. Nothing comes to rest that a player couldn’t have placed themselves.</p>
+
+        <figure class="shot">
+            <img src="../phase_shots/step2_drops.png" alt="Phase 2: extra curved pieces dropped onto the landscape, each settled into a real landing position the game’s physics allows.">
+            <figcaption>Phase 2: pieces dropped onto the contour, each falling through the real collision system to a landing a player could have reached.</figcaption>
+        </figure>
+
+        <h2>3. Gaps — carve, don’t scatter</h2>
+
+        <p>To make it a puzzle it needs to have holes — and in QUARC a hole is not a shape you draw, it’s a space you failed to fill. For a hole to be possible to fix, it needs to be the exact shape of a golden piece that could fill it. So instead of inventing gap shapes, the generator subtracts them.</p>
+
+        <figure class="shot">
+            <img src="../phase_shots/step3_gaps.png" alt="Phase 3: negative space carved into the filled board — single-cell lemon-shaped gaps and full piece-shaped pockets.">
+            <figcaption>Phase 3: adding piece-shaped gaps by punching holes in the landscape.</figcaption>
+        </figure>
+
+        <p>The algorithm carves two kinds of negative space: a single-cell lemon-shaped gap formed by two concave curves, and a full two-by-two piece-shaped pocket. It will only cut a piece-shaped pocket where all four cells are filled and fully surrounded, so the hole is always a clean, closed, fillable shape rather than a notch leaking out to the edge. Where the algorithm carves is, once again, a pattern for the day — a light scattering, one or two complete rows, a pair of columns top to bottom, or a single diagonal slash across the board.</p>
+
+        <p>After the pattern of gaps is added, we scan for any row that happened to come out completely full and punch a single lemon-shaped gap through it: a board should never hand you a cleared row for free on turn one — you have to earn it.</p>
+
+        <h2>4. Colorize</h2>
+
+        <p>Everything up to here is done in neutral gray; not one decision depends on color. Only at the very end does a final pass walk the finished terrain and paint it as if it were made of real colored pieces — matching each two-by-two patch of curves to an actual piece shape (and the half-pieces along the edges, and the quarter-pieces in the corners), preferring the rounder shapes over spiky stars, and washing whatever’s left over in the star color (often in shapes that would be impossible to create by playing). Logic first, in monochrome; color strictly on top.</p>
+
+        <figure class="shot">
+            <img src="../phase_shots/step4_colorization.png" alt="Phase 4: the finished board, with the gray terrain skinned into real colored QUARC pieces.">
+            <figcaption>Phase 4: the finished board, painted into real colored pieces only after every structural decision is made.</figcaption>
+        </figure>
+
+        <h2>Why do it this way</h2>
+
+        <p>I could have hand-built a few hundred boards and shipped them in a file. Generating them instead means the supply never runs dry, the app stays tiny, there’s nothing to host or break, and every player anywhere is provably solving the identical board — which is the entire point of a daily leaderboard. But the part I actually care about is that the board never gives you something impossible to tackle. And the randomness has a grammar: each day commits to a few themes — a diagonal contour, all-circle drops, complete-column gaps — so the board feels like a small piece of art even though there is no artist.</p>
+
+        <p>If you want today’s board, try challenge mode for free by <a href="https://apps.apple.com/us/app/quarc/id6760784173">downloading QUARC on the App Store</a> — I can guarantee there’s always a new one waiting.</p>
+
+        <p class="endmark">
+            —
+            <svg width="34" height="34" viewBox="0 0 100 100" role="img" aria-label="The QUARC piece mark" style="vertical-align:middle;">
+                <path fill="var(--gold)" d="M 50 6 A 44 44 0 0 0 94 50 A 44 44 0 0 1 50 94 A 44 44 0 0 1 6 50 A 44 44 0 0 1 50 6 Z"/>
+            </svg>
+            —
+        </p>
+
+        <div class="author">
+            <strong>Luke Bradford</strong> is an independent iOS developer behind a small family of minimalist, design-led apps built around geometry, color, and restraint, including QUARC, <a href="https://apps.apple.com/us/app/symmetry-lab/id327084012">Symmetry Lab</a> and <a href="https://apps.apple.com/us/app/textile-minimal-notes/id1304075165">Textile</a>. Questions or notes are welcome at <a href="mailto:lukebradfordapps@gmail.com">lukebradfordapps@gmail.com</a>.
+        </div>
+    </article>
+
+    <footer>
+        &copy; 2026 Luke Bradford &nbsp;·&nbsp; <a href="../">Blog</a> &nbsp;·&nbsp; <a href="../../">QUARC support</a> &nbsp;·&nbsp; <a href="../../press/">Press kit</a> &nbsp;·&nbsp; <a href="https://apps.apple.com/us/app/quarc/id6760784173">App Store</a> &nbsp;·&nbsp; <a href="https://apps.lukebradford.xyz">More apps</a>
+    </footer>
+</body>
+</html>

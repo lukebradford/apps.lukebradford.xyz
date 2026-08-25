@@ -50,7 +50,7 @@ ABOUT THE DEVELOPER
 -------------------
 Luke Bradford is an independent iOS developer behind a small family of
 minimalist, design-led apps — each built around a love of geometry, color,
-and restraint. Also by Luke: QUARC (lukebradford.github.io/quarc), a
+and restraint. Also by Luke: QUARC (apps.lukebradford.xyz/quarc), a
 falling-block puzzle with curved pieces, and Symmetry Lab
 (symmetrylab.app), a studio for symmetrical pattern art.
 

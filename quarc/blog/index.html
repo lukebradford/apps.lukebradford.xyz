@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUARC — Blog</title>
+    <meta name="description" content="Notes on design, geometry, and the making of QUARC and other small iOS apps by Luke Bradford.">
+    <link rel="canonical" href="https://apps.lukebradford.xyz/quarc/blog/">
+    <link rel="icon" type="image/png" href="../AppIcon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apps.lukebradford.xyz/quarc/blog/">
+    <meta property="og:title" content="QUARC — Blog">
+    <meta property="og:description" content="Notes on design, geometry, and the making of QUARC and other small iOS apps by Luke Bradford.">
+    <meta property="og:image" content="https://apps.lukebradford.xyz/quarc/press/assets/quarc-app-icon-1024.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="QUARC — Blog">
+    <meta name="twitter:description" content="Notes on design, geometry, and the making of QUARC.">
+    <meta name="twitter:image" content="https://apps.lukebradford.xyz/quarc/press/assets/quarc-app-icon-1024.png">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000;
+            --fg: #d9d9e2;
+            --bright: #f3f3f8;
+            --muted: #8a8a96;
+            --dim: #555;
+            --line: #1c1c24;
+            --card: #0b0b0f;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: #fff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        header {
+            text-align: center;
+            padding: 4rem 1.5rem 1.5rem;
+        }
+        header .eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.4rem;
+        }
+        header img {
+            height: 6rem;
+            max-width: 70%;
+            object-fit: contain;
+        }
+        header .tagline {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-top: 0.6rem;
+        }
+
+        main {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 4rem;
+            flex: 1;
+        }
+
+        .post {
+            display: block;
+            padding: 1.6rem 0;
+            border-top: 1px solid var(--line);
+            transition: opacity 0.15s;
+        }
+        .post:hover { text-decoration: none; }
+        .post:hover h2 { text-decoration: underline; }
+        .post:last-of-type { border-bottom: 1px solid var(--line); }
+
+        .post .meta {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+        .post h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--bright);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+        .post p {
+            color: var(--fg);
+            font-size: 1.02rem;
+            line-height: 1.6;
+        }
+        .post .more {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            font-size: 0.85rem;
+            color: var(--dim);
+            border-top: 1px solid var(--line);
+        }
+        footer a { color: var(--muted); }
+
+        @media (max-width: 520px) {
+            header { padding-top: 3rem; }
+            header img { height: 4.5rem; }
+            .post h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <p class="eyebrow">Blog</p>
+        <img src="../press/assets/quarc-wordmark.png" alt="QUARC">
+    </header>
+
+    <main>
+        <a class="post" href="infinite-challenge-boards/">
+            <div class="meta">May 31, 2026 · Design Notes · 6 min read</div>
+            <h2>How QUARC creates infinite challenge mode boards</h2>
+            <p>QUARC’s daily challenge is the same board for everyone on Earth and needs no server — because the whole thing unfolds from a single integer. A look at the algorithm: a constrained random walk, drops played through the real physics, and gaps carved as the complement of pieces.</p>
+            <span class="more">Read the post →</span>
+        </a>
+    </main>
+
+    <footer>
+        &copy; 2026 Luke Bradford &nbsp;·&nbsp; <a href="../">QUARC support</a> &nbsp;·&nbsp; <a href="../press/">Press kit</a> &nbsp;·&nbsp; <a href="https://apps.apple.com/us/app/quarc/id6760784173">App Store</a> &nbsp;·&nbsp; <a href="https://apps.lukebradford.xyz">More apps</a>
+    </footer>
+</body>
+</html>
