@@ -67,23 +67,29 @@
             padding: 0 1.5rem 0.5rem;
         }
 
-        /* Screenshot strip — raw shots on black, so they blend into the page */
+        /* Screenshot row — raw shots on black, so they blend into the page.
+           Breaks out wider than the text column; wraps instead of scrolling. */
+        .shots-section {
+            width: min(900px, 94vw);
+            margin-left: 50%;
+            transform: translateX(-50%);
+            padding: 0 1rem;
+        }
+
         .shots {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 0.9rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
         }
 
         .shots img {
-            flex: 0 0 auto;
-            width: 200px;
+            flex: 1 1 160px;
+            min-width: 140px;
+            max-width: 210px;
             height: auto;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.12);
-            scroll-snap-align: start;
         }
 
         main {
@@ -169,6 +175,14 @@
         footer a {
             color: #888;
         }
+
+        footer .credits {
+            max-width: 640px;
+            margin: 1rem auto 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -180,14 +194,14 @@
         <video class="hero-clip" src="clip2.mp4" poster="clip2-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="A short screen recording of Megalith building and animating a block-text poster."></video>
     </div>
     <div class="cta">
-        <a class="contact-link" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">Download on the App&nbsp;Store</a>
+        <a class="contact-link" href="https://apps.apple.com/us/app/megalith-text-poster-maker/id6772761741">Download on the App&nbsp;Store</a>
     </div>
     <main>
         <section>
             <h2>About</h2>
             <p>Megalith turns a handful of words into a striking, block-justified text graphic that you can shuffle, share, and set in motion. Every line is stretched to fill the same width, with each line’s font size adjusted to match, so your words form a solid block with clean edges on both sides. It’s the look of vintage justified posters, rebuilt as a fast, tactile app.</p>
         </section>
-        <section>
+        <section class="shots-section">
             <div class="shots">
                 <img src="screenshots/megalith-01-sun.jpg" width="600" height="1304" loading="lazy" alt="A Megalith poster reading “I’ll be in sync with the sun while you run from the moon,” with the text controls sheet open.">
                 <img src="screenshots/megalith-02-color-controls.jpg" width="600" height="1304" loading="lazy" alt="The Megalith editor with a purple poster, Share and Animate buttons, and text and background color controls.">
@@ -218,7 +232,8 @@
         </section>
     </main>
     <footer>
-        <a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">App Store</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="press/">Press kit</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Megalith%20for%20iPhone">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
+        <a href="https://apps.apple.com/us/app/megalith-text-poster-maker/id6772761741">App Store</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="press/">Press kit</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Megalith%20for%20iPhone">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
+        <p class="credits">Screenshots include quotes from Bob Dylan’s “From a Buick 6,” Carbon Leaf’s “Paloma,” Saul Williams’ “Amethyst Rocks,” and Temples’ “Keep in the Dark,” along with a photo by Gabriele Motter.</p>
     </footer>
 </body>
 </html>
