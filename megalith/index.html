@@ -62,6 +62,30 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
+        .cta {
+            text-align: center;
+            padding: 0 1.5rem 0.5rem;
+        }
+
+        /* Screenshot strip — raw shots on black, so they blend into the page */
+        .shots {
+            display: flex;
+            gap: 0.9rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .shots img {
+            flex: 0 0 auto;
+            width: 200px;
+            height: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            scroll-snap-align: start;
+        }
+
         main {
             max-width: 640px;
             margin: 0 auto;
@@ -155,18 +179,30 @@
     <div class="hero">
         <video class="hero-clip" src="clip2.mp4" poster="clip2-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="A short screen recording of Megalith building and animating a block-text poster."></video>
     </div>
+    <div class="cta">
+        <a class="contact-link" href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">Download on the App&nbsp;Store</a>
+    </div>
     <main>
         <section>
             <h2>About</h2>
-            <p>Megalith turns a handful of words into a striking, block-justified text graphic — and now sets it in motion. Every line is stretched to fill the same width, with each line’s font size set by how much text it holds, so your words form a solid block with clean edges on both sides. It’s the look of vintage justified posters (“ON THE BEACH,” the old “FALL IN” recruitment prints), rebuilt as a fast, tactile app.</p>
+            <p>Megalith turns a handful of words into a striking, block-justified text graphic that you can shuffle, share, and set in motion. Every line is stretched to fill the same width, with each line’s font size adjusted to match, so your words form a solid block with clean edges on both sides. It’s the look of vintage justified posters, rebuilt as a fast, tactile app.</p>
+        </section>
+        <section>
+            <div class="shots">
+                <img src="screenshots/megalith-01-sun.jpg" width="600" height="1304" loading="lazy" alt="A Megalith poster reading “I’ll be in sync with the sun while you run from the moon,” with the text controls sheet open.">
+                <img src="screenshots/megalith-02-color-controls.jpg" width="600" height="1304" loading="lazy" alt="The Megalith editor with a purple poster, Share and Animate buttons, and text and background color controls.">
+                <img src="screenshots/megalith-03-photo-background.jpg" width="600" height="1304" loading="lazy" alt="A Megalith poster set over a starry-night photo reading “Take cover when it’s dark and keep an even keel.”">
+                <img src="screenshots/megalith-04-night.jpg" width="600" height="1304" loading="lazy" alt="A serif Megalith poster over a night-sky photo reading “Sleep won’t save you from the night.”">
+            </div>
         </section>
         <section>
             <h2>Features</h2>
             <ul>
-                <li>Type a short phrase — press return for an explicit line break</li>
-                <li>Shuffle fonts and layout with a single tap</li>
+                <li>Type a short phrase, and press return for an explicit line break</li>
+                <li>Shuffle fonts and layout with a single tap and unlimited undo</li>
                 <li>Choose a canvas shape: Square, Portrait, Story, or Poster</li>
-                <li>Set the text color and a background color or photo</li>
+                <li>Set the text color and a background color or photo, with optional blur</li>
+                <li>Animate the result with smooth, dynamic letter-by-letter motion</li>
                 <li>Share the result or save it to your photo library</li>
             </ul>
         </section>
@@ -177,12 +213,12 @@
         </section>
         <section>
             <h2>Privacy</h2>
-            <p>Megalith collects no personal data and does no tracking. There are no accounts, no analytics, and no third-party SDKs — everything happens on your device. Photos you choose as backgrounds are processed locally and never uploaded, and the app only writes to your photo library when you save a graphic you’ve made.</p>
+            <p>Megalith collects no personal data and does no tracking. There are no accounts, no analytics, and no third-party SDKs — everything happens on your device. Photos you choose as backgrounds are processed locally and never uploaded, and the app only writes to your photo library when you save a poster you’ve made.</p>
             <p style="margin-top: 1rem;">Read the full <a href="privacy.html">privacy policy</a>.</p>
         </section>
     </main>
     <footer>
-        <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="press/">Press kit</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Megalith%20for%20iPhone">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
+        <a href="https://apps.apple.com/us/app/megalith-block-text-posters/id6772761741">App Store</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="press/">Press kit</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Megalith%20for%20iPhone">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
     </footer>
 </body>
 </html>
