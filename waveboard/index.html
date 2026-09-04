@@ -75,6 +75,37 @@
                 box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
             }
 
+            .cta {
+                text-align: center;
+                padding: 0 1.5rem 0.5rem;
+            }
+
+            /* Screenshot row — raw iPad shots on black, wider than the text
+               column; two across on desktop, wraps to one on narrow screens. */
+            .shots-section {
+                width: min(1000px, 94vw);
+                margin-left: 50%;
+                transform: translateX(-50%);
+                padding: 0 1rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .shots {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .shots img {
+                flex: 1 1 380px;
+                min-width: 300px;
+                max-width: 460px;
+                height: auto;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+            }
+
             main {
                 max-width: 640px;
                 margin: 0 auto;
@@ -158,11 +189,22 @@
         <div class="hero">
             <video class="hero-clip" src="preview.mp4" poster="preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="A short screen recording of Waveboard: playing a wired instrument, then opening its patch and the oscillator controls."></video>
         </div>
+        <div class="cta">
+            <a class="button" href="https://apps.apple.com/us/app/waveboard/id544597426">Download on the App&nbsp;Store</a>
+        </div>
         <main>
             <section>
                 <h2>About</h2>
                 <p>Wire together touch pads, keyboards, oscillators, sensors, sliders, switches and speakers to build a synthesizer exactly the way you want it — or start from one of thirty built-in instruments, from ballpark organs to spaced-out synth pads, and rewire until you get the sound you want.</p>
                 <p>Every component is polyphonic, so touch pads and keyboards play up to five fingers at once. Everything runs on your own device: no account, no network, no subscription.</p>
+            </section>
+            <section class="shots-section">
+                <div class="shots">
+                    <img src="screenshots/waveboard-01-keyboard.jpg" width="1400" height="1050" loading="lazy" alt="Playing a Waveboard instrument on a full-width piano keyboard.">
+                    <img src="screenshots/waveboard-02-patch.jpg" width="1400" height="1050" loading="lazy" alt="A Waveboard patch: a touch pad and a keyboard wired through oscillators and math blocks into a filter and a speaker.">
+                    <img src="screenshots/waveboard-03-components.jpg" width="1400" height="1050" loading="lazy" alt="The Add component panel listing inputs: touch pad, keyboard, sequencer, trigger pad, slider, switch, button, number box, and sensors.">
+                    <img src="screenshots/waveboard-04-instruments.jpg" width="1400" height="1050" loading="lazy" alt="The Load instrument dialog showing built-in instruments including Autoharpsichord, Ballpark Organ, Blueberry Pad, and Bubble Warp.">
+                </div>
             </section>
             <section>
                 <h2>Manual</h2>
@@ -180,7 +222,7 @@
             </section>
         </main>
         <footer>
-            &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
+            <a href="https://apps.apple.com/us/app/waveboard/id544597426">App Store</a> &nbsp;·&nbsp; <a href="privacy/">Privacy policy</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Waveboard">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
         </footer>
     </body>
 </html>
