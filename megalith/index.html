@@ -67,6 +67,31 @@
             padding: 0 1.5rem 0.5rem;
         }
 
+        .cta .store-badge {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            will-change: transform;
+        }
+
+        .cta .store-badge img {
+            height: 2.75rem;
+            width: auto;
+            display: block;
+        }
+
+        .cta .store-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.18);
+        }
+
+        .cta .store-badge:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(255, 255, 255, 0.12);
+        }
+
         /* Screenshot row — raw shots on black, so they blend into the page.
            Breaks out wider than the text column; wraps instead of scrolling. */
         .shots-section {
@@ -194,7 +219,7 @@
         <video class="hero-clip" src="clip2.mp4" poster="clip2-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="A short screen recording of Megalith building and animating a block-text poster."></video>
     </div>
     <div class="cta">
-        <a class="contact-link" href="https://apps.apple.com/us/app/megalith-text-poster-maker/id6772761741">Download on the App&nbsp;Store</a>
+        <a class="store-badge" href="https://apps.apple.com/us/app/megalith-text-poster-maker/id6772761741"><img src="../app-store-badge-dark.svg" alt="Download Megalith on the App Store"></a>
     </div>
     <main>
         <section>
