@@ -1,7 +1,7 @@
 MEGALITH — PRESS KIT
 ====================
 
-Online version: https://lukebradford.github.io/megalith/press/
+Online version: https://apps.lukebradford.xyz/megalith/press/
 App Store:      https://apps.apple.com/us/app/id6772761741
 
 
