@@ -1,228 +1,293 @@
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Waveboard for iPad — wire together touch pads, keyboards, oscillators, sensors and speakers to build your own synthesizer. Manual and support.">
-        <meta name="theme-color" content="#000000">
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../apple-touch-icon-152x152.png" />
-        <link rel="icon" type="image/png" href="../favicon-196x196.png" sizes="196x196" />
-        <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
-        <title>Waveboard</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                -webkit-font-smoothing: antialiased;
-            }
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waveboard — strange, lovely instruments for iPad</title>
+<meta name="description" content="Waveboard for iPad: a box of strange, lovely instruments — Popcorn Cooker, Tabla Tennis, Nuclear Whistle — and the workbench they were built on. Free to try. One unlock. No subscription, ever.">
+<meta name="theme-color" content="#000000">
+<meta name="apple-itunes-app" content="app-id=544597426">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Waveboard — strange, lovely instruments for iPad">
+<meta property="og:description" content="Free to try. One unlock. No subscription, ever.">
+<meta property="og:url" content="https://apps.lukebradford.xyz/waveboard/">
+<meta property="og:image" content="https://apps.lukebradford.xyz/waveboard/shots/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../apple-touch-icon-152x152.png">
+<link rel="icon" type="image/png" href="../favicon-196x196.png" sizes="196x196">
+<link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32">
+<style>
+:root{--accent:#9cc4ff;--bg:#000;--surface:#0d0f13;--surface2:#14171d;--ink:#fff;--ink2:#c7ccd6;
+ --ink3:#8a90a0;--ink4:#777c88;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.18);
+ --accent-soft:rgba(156,196,255,.13);--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink2);font-family:var(--sans);font-size:17px;line-height:1.6;
+ -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{color:var(--ink);line-height:1.15;text-wrap:balance}
+img,video{max-width:100%;height:auto;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.read{max-width:640px;margin:0 auto}
 
-            :root {
-                --accent: #9cc4ff;
-            }
+header.hero{text-align:center;padding:52px 20px 8px}
+.appicon{width:96px;height:96px;border-radius:22px;margin:0 auto;border:1px solid rgba(255,255,255,.14);
+ box-shadow:0 0 0 1px rgba(0,0,0,.5),0 10px 34px rgba(84,132,230,.38),inset 0 1px 1px rgba(255,255,255,.22)}
+.wordmark{width:min(340px,72%);margin:22px auto 0}
+.hero h1{font-size:clamp(26px,4.6vw,40px);font-weight:700;margin:22px auto 0;max-width:20ch;letter-spacing:-.01em}
+.hero .lede{font-size:clamp(17px,2.2vw,19px);color:var(--ink2);max-width:40ch;margin:12px auto 0}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 0}
+.chip{font-family:var(--mono);font-size:12.5px;color:var(--ink2);background:var(--surface);border:1px solid var(--line);
+ border-radius:20px;padding:4px 12px}
+.chip.ipad{color:#000;background:var(--accent);border-color:var(--accent);font-weight:600}
 
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-                background: #000000;
-                color: #c7ccd6;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+.cta{text-align:center;padding:26px 20px 6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:50px;padding:12px 28px;
+ border-radius:12px;background:var(--accent);color:#000;font-weight:650;font-size:17px;border:0;cursor:pointer;
+ font-family:inherit;text-decoration:none}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft)}
+.cta .fine{font-size:14px;color:var(--ink3);margin-top:10px}
 
-            header {
-                text-align: center;
-                padding: 3.5rem 1.5rem 1.25rem;
-            }
+/* Phone visitors: they cannot install an iPad-only app. */
+.phone{display:none}
+.is-phone .phone{display:block}
+.is-phone .cta.main{display:none}
+.phone .panel{max-width:520px;margin:26px auto 0;text-align:center;background:var(--accent-soft);
+ border:1px solid rgba(156,196,255,.3);border-radius:16px;padding:20px 18px}
+.phone .panel h2{font-size:20px}
+.phone .panel p{font-size:15.5px;margin-top:6px}
+.phone .row{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.phone .row .btn{width:100%}
+.phone .small{font-size:14px;margin-top:12px;color:var(--ink3)}
 
-            header img.appicon {
-                width: 104px;
-                height: 104px;
-                border-radius: 23px;
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5),
-                            0 10px 34px rgba(84, 132, 230, 0.38),
-                            inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            }
+.clip{max-width:760px;margin:30px auto 0;padding:0 20px}
+.clip video,.clip img{width:100%;border-radius:16px;border:1px solid var(--line2);box-shadow:0 12px 40px rgba(0,0,0,.6);background:#111}
 
-            header img.wordmark {
-                display: block;
-                width: min(360px, 74%);
-                height: auto;
-                margin: 1.4rem auto 0;
-            }
+section{padding:64px 0 0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+section h2{font-size:clamp(24px,3.4vw,32px);font-weight:700}
+section .intro{margin-top:10px;color:var(--ink2)}
 
-            header .tagline {
-                font-size: 1.05rem;
-                color: #8a90a0;
-                margin-top: 0.85rem;
-            }
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card .shot{background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line)}
+.card .shot img{width:100%;height:100%;object-fit:contain}
+.card .txt{padding:14px 16px 16px}
+.card h3{font-size:18px}
+.card p{font-size:15px;color:var(--ink3);margin-top:3px}
+.alsofree{margin-top:18px;font-size:15px;color:var(--ink3)}
 
-            /* App Store preview clip — plain rounded video, no device chrome */
-            .hero {
-                display: flex;
-                justify-content: center;
-                padding: 0.75rem 1.5rem 1rem;
-            }
+.pair{display:grid;grid-template-columns:1fr;gap:18px;margin-top:28px}
+@media(min-width:800px){.pair{grid-template-columns:1fr 1fr}}
+.pair img{border-radius:14px;border:1px solid var(--line)}
 
-            .hero-clip {
-                display: block;
-                width: 100%;
-                max-width: 520px;
-                height: auto;
-                border-radius: 16px;
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-            }
+.deal{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px}
+@media(min-width:800px){.deal{grid-template-columns:repeat(3,1fr)}}
+.deal .tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.deal .tile.hi{border-color:rgba(156,196,255,.45);background:var(--accent-soft)}
+.deal h3{font-size:18px}
+.deal p{font-size:15.5px;margin-top:6px}
+.loadshot{margin-top:18px}
+.loadshot img{border-radius:14px;border:1px solid var(--line)}
 
-            .cta {
-                text-align: center;
-                padding: 0 1.5rem 0.5rem;
-            }
+ul.honest{list-style:none;margin-top:20px;display:grid;gap:10px}
+ul.honest li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:15.5px}
+ul.honest b{color:var(--ink)}
 
-            /* Screenshot row — raw iPad shots on black, wider than the text
-               column; two across on desktop, wraps to one on narrow screens. */
-            .shots-section {
-                width: min(1000px, 94vw);
-                margin-left: 50%;
-                transform: translateX(-50%);
-                padding: 0 1rem;
-                margin-bottom: 2.5rem;
-            }
+.more{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+@media(min-width:800px){.more{grid-template-columns:repeat(3,1fr)}}
+.more .tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.more h3{font-size:18px}.more p{font-size:15px;margin-top:6px}
+.more .btn{margin-top:14px;min-height:42px;padding:8px 18px;font-size:15px}
 
-            .shots {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
+.final{text-align:center;padding:72px 20px 8px}
+.final h2{font-size:clamp(24px,3.4vw,32px)}
+footer{text-align:center;padding:48px 20px 40px;font-size:14px;color:var(--ink4)}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<header class="hero">
+  <img class="appicon" src="icon-waveboard.png" width="96" height="96" alt="Waveboard app icon">
+  <img class="wordmark" src="wordmark.png" alt="Waveboard">
+  <h1>A box of strange, lovely instruments for iPad.</h1>
+  <p class="lede">A Popcorn Cooker you play with one finger. Drums you can bend. A trombone you play by blowing into your iPad. And the workbench they were built on.</p>
+  <div class="chips"><span class="chip ipad">iPad only</span><span class="chip">Free to try</span><span class="chip">One unlock</span><span class="chip">No subscription, ever</span></div>
+</header>
 
-            .shots img {
-                flex: 1 1 380px;
-                min-width: 300px;
-                max-width: 460px;
-                height: auto;
-                border-radius: 14px;
-                border: 1px solid rgba(255, 255, 255, 0.12);
-            }
+<div class="phone" id="phone">
+  <div class="wrap"><div class="panel">
+    <h2>Waveboard is an iPad app.</h2>
+    <p>It won’t install on a phone — it wants the big screen. Send it to your iPad and open it there.</p>
+    <div class="row">
+      <button class="btn" id="send-share" type="button" hidden>Send to my iPad</button>
+      <a class="btn ghost" id="send-mail" href="mailto:">Email me the link</a>
+      <button class="btn ghost" id="send-copy" type="button" hidden>Copy the link</button>
+    </div>
+    <p class="small">Or <a href="https://apps.apple.com/app/id544597426?pt=264080&amp;ct=web-landing&amp;mt=8" data-store>see it on the App Store</a> anyway.</p>
+  </div></div>
+</div>
 
-            main {
-                max-width: 640px;
-                margin: 0 auto;
-                padding: 2rem 1.5rem 4rem;
-                flex: 1;
-                width: 100%;
-            }
+<div class="cta main">
+  <a class="btn" href="https://apps.apple.com/app/id544597426?pt=264080&amp;ct=web-landing&amp;mt=8" data-store>Get it free on the App Store</a>
+  <p class="fine">For iPad · iPadOS 15 or later · No ads, no account</p>
+</div>
 
-            section {
-                margin-bottom: 2.5rem;
-            }
+<div class="clip">
+  <video src="preview.mp4" poster="preview-poster.jpg" autoplay muted loop playsinline preload="metadata"
+    aria-label="A short screen recording of Waveboard: playing an instrument, then opening its patch."></video>
+</div>
 
-            h2 {
-                font-size: 1.25rem;
-                font-weight: 600;
-                color: #ffffff;
-                margin-bottom: 0.75rem;
-            }
+<main class="wrap">
+<section id="play">
+  <div class="read">
+    <div class="eyebrow">Play something in ten seconds</div>
+    <h2>Pick a name that makes you curious. Put your fingers on the glass.</h2>
+    <p class="intro">Up to five fingers at once. Every instrument below is free.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="shot"><img src="shots/popcorn-cooker.jpg" width="1400" height="724" loading="lazy" decoding="async" alt="Popcorn Cooker, playing surface"></div><div class="txt"><h3>Popcorn Cooker</h3><p>A whole groove from one finger.</p></div></article><article class="card"><div class="shot"><img src="shots/tabla-tennis.jpg" width="1400" height="714" loading="lazy" decoding="async" alt="Tabla Tennis, playing surface"></div><div class="txt"><h3>Tabla Tennis</h3><p>Tap the drums with one hand, bend them with the other.</p></div></article><article class="card"><div class="shot"><img src="shots/gridlock.jpg" width="1400" height="582" loading="lazy" decoding="async" alt="Gridlock, playing surface"></div><div class="txt"><h3>Gridlock</h3><p>Sixty crunchy, bit-crushed pads. Five fingers at once.</p></div></article><article class="card"><div class="shot"><img src="shots/chatterbox.jpg" width="1400" height="635" loading="lazy" decoding="async" alt="Chatterbox, playing surface"></div><div class="txt"><h3>Chatterbox</h3><p>A 16-row sequencer that plays itself. Tap in a pattern, then mess with it.</p></div></article><article class="card"><div class="shot"><img src="shots/sonatatron.jpg" width="1400" height="533" loading="lazy" decoding="async" alt="Sonatatron, playing surface"></div><div class="txt"><h3>Sonatatron</h3><p>Play a chord and a sequencer chops it into rhythm.</p></div></article><article class="card"><div class="shot"><img src="shots/melodica.jpg" width="1400" height="269" loading="lazy" decoding="async" alt="Melodica, playing surface"></div><div class="txt"><h3>Melodica</h3><p>Play the keys and blow into your iPad&#x27;s microphone.</p></div></article>
+  </div>
+  <p class="alsofree read">Also free: Blueberry Pad, Circus Organ, Eggbeater and Space Camp.</p>
+</section>
 
-            p {
-                line-height: 1.7;
-                color: #c7ccd6;
-                font-size: 1rem;
-            }
+<section id="build">
+  <div class="read">
+    <div class="eyebrow">Then flip it over</div>
+    <h2>Every instrument is a patch you can open and change.</h2>
+    <p class="intro">Components on a canvas, joined by wires you draw with a finger. Reroute one wire and it becomes something else — or start from a blank canvas with 38 components: keyboards, touch pads, trigger pads, step sequencers and sliders; oscillators, envelopes, filters and effects; math and logic for modulation; a microphone listener and a motion sensor. The builder is free, and so is saving what you make.</p>
+  </div>
+  <div class="pair"><img src="shots/patch-popcorn-cooker.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The Popcorn Cooker flipped over: a touch pad and a trigger pad wired through components to a speaker."><img src="shots/patch-twangarang.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="A larger patch: inputs wired through oscillators, envelopes and math into a speaker."></div>
+</section>
 
-            p + p {
-                margin-top: 1rem;
-            }
+<section id="deal">
+  <div class="read">
+    <div class="eyebrow">The whole deal</div>
+    <h2>Free to try. One unlock. No subscription, ever.</h2>
+  </div>
+  <div class="deal">
+    <div class="tile"><h3>Free</h3><p>Ten instruments and the complete instrument builder, with no time limit and no ads.</p></div>
+    <div class="tile hi"><h3>Full Unlock</h3><p>One purchase, once: twenty more built-in instruments — the Nuclear Whistle, Trombang, Dancebot 1982, Gold Rush, Moonflower and more — plus song recording to a WAV file. Try any locked instrument first.</p></div>
+    <div class="tile"><h3>Bought it before?</h3><p>Everything stays unlocked for you, free. If it ever asks, tap Restore Purchase in Settings.</p></div>
+  </div>
+  <div class="loadshot"><img src="shots/load-unlock.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The Load window as a free user: ten instruments open, the rest with a lock badge and a Try button."></div>
+</section>
 
-            a {
-                color: var(--accent);
-                text-decoration: none;
-            }
+<section id="honest">
+  <div class="read">
+    <div class="eyebrow">Honest about what it is</div>
+    <h2>So you know before you download.</h2>
+    <ul class="honest">
+      <li><b>iPad only.</b> It’s a canvas-and-cables interface and it wants the screen.</li>
+      <li><b>A standalone instrument, not an AUv3 plugin.</b> It doesn’t load inside AUM, Loopy Pro or Cubasis. MIDI keyboards (USB or Bluetooth) work.</li>
+      <li><b>No Ableton Link.</b> Think sketchpad and toy box, not a synced member of a live rig.</li>
+      <li><b>The microphone is only listened to.</b> A few instruments follow how loud you are. Nothing from the mic is recorded or sent anywhere.</li>
+      <li><b>Yours.</b> No account, no login, no ads, no tracking. Instruments are small files in the Files app.</li>
+    </ul>
+  </div>
+</section>
 
-            a:hover {
-                text-decoration: underline;
-            }
+<section id="help">
+  <div class="read"><div class="eyebrow">Manual, support, privacy</div></div>
+  <div class="more">
+    <div class="tile"><h3>Manual</h3><p>Every component, the wiring model and the song recorder.</p><a class="btn ghost" href="waveboard-manual.pdf">Download the manual (PDF)</a></div>
+    <div class="tile"><h3>Support</h3><p>Found a bug, want a component that doesn’t exist yet, or need a hand with a patch? Write, and I’ll get back to you.</p><a class="btn ghost" href="mailto:lukebradfordapps@gmail.com?subject=Waveboard">Contact support</a></div>
+    <div class="tile"><h3>Privacy</h3><p>Waveboard collects no data at all — no accounts, no analytics, no tracking, no third-party SDKs.</p><a class="btn ghost" href="privacy/">Privacy policy</a></div>
+  </div>
+</section>
+</main>
 
-            .button {
-                display: inline-block;
-                margin-top: 0.85rem;
-                padding: 0.65rem 1.6rem;
-                border: 1px solid var(--accent);
-                border-radius: 8px;
-                color: var(--accent);
-                font-size: 1rem;
-                text-decoration: none;
-                transition: background 0.2s, color 0.2s;
-            }
+<div class="final">
+  <h2>First released in 2012. Rebuilt for today’s iPad.</h2>
+  <div class="cta main"><a class="btn" href="https://apps.apple.com/app/id544597426?pt=264080&amp;ct=web-landing&amp;mt=8" data-store>Get it free on the App Store</a><p class="fine">For iPad · iPadOS 15 or later</p></div>
+</div>
 
-            .button:hover {
-                background: var(--accent);
-                color: #000000;
-                text-decoration: none;
-            }
+<footer>
+  <a href="https://apps.apple.com/app/id544597426?pt=264080&amp;ct=web-landing&amp;mt=8" data-store>App Store</a> &nbsp;·&nbsp; <a href="privacy/">Privacy policy</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Waveboard">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>
+</footer>
+<script>// Waveboard landing page behaviour (B1). Inlined into index.html by build_landing.py and
+// unit-tested by Tests/run-landing-page-check.sh (node), so keep the pure functions pure.
+//
+// 1. Campaign pass-through: a clip links here as ?src=tt-03; every App Store button on the
+//    page then carries ct=web-tt-03 so App Analytics credits the clip, not "the website"
+//    (BUSINESS/marketing/links.md). No src -> ct=web-landing.
+// 2. Phone visitors: Waveboard is iPad-only. A phone gets a "send it to my iPad" panel
+//    (share sheet, else mail, plus copy) instead of a dead-end install button.
 
-            footer {
-                text-align: center;
-                padding: 1.5rem;
-                font-size: 0.85rem;
-                color: #777c88;
-            }
+var WB_STORE_BASE = "https://apps.apple.com/app/id544597426?pt=264080&mt=8&ct=";
 
-            footer a {
-                color: inherit;
-                text-decoration: none;
-            }
+// ct= allows <= 40 chars of [a-z0-9_-]; "web-" takes 4.
+function wbCampaign(search) {
+  var m = /[?&]src=([^&#]*)/.exec(search || "");
+  var s = "";
+  if (m) {
+    try { s = decodeURIComponent(m[1].replace(/\+/g, " ")); } catch (e) { s = m[1]; }
+  }
+  s = s.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 36);
+  return s ? "web-" + s : "web-landing";
+}
 
-            footer a:hover {
-                color: inherit;
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <img class="appicon" src="icon-waveboard.png" alt="Waveboard app icon">
-            <img class="wordmark" src="wordmark.png" alt="Waveboard">
-            <p class="tagline">A modular synthesizer for iPad</p>
-        </header>
-        <div class="hero">
-            <video class="hero-clip" src="preview.mp4" poster="preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="A short screen recording of Waveboard: playing a wired instrument, then opening its patch and the oscillator controls."></video>
-        </div>
-        <div class="cta">
-            <a class="button" href="https://apps.apple.com/us/app/waveboard/id544597426">Download on the App&nbsp;Store</a>
-        </div>
-        <main>
-            <section>
-                <h2>About</h2>
-                <p>Wire together touch pads, keyboards, oscillators, sensors, sliders, switches and speakers to build a synthesizer exactly the way you want it — or start from one of thirty built-in instruments, from ballpark organs to spaced-out synth pads, and rewire until you get the sound you want.</p>
-                <p>Every component is polyphonic, so touch pads and keyboards play up to five fingers at once. Everything runs on your own device: no account, no network, no subscription.</p>
-            </section>
-            <section class="shots-section">
-                <div class="shots">
-                    <img src="screenshots/waveboard-01-keyboard.jpg" width="1400" height="1050" loading="lazy" alt="Playing a Waveboard instrument on a full-width piano keyboard.">
-                    <img src="screenshots/waveboard-02-patch.jpg" width="1400" height="1050" loading="lazy" alt="A Waveboard patch: a touch pad and a keyboard wired through oscillators and math blocks into a filter and a speaker.">
-                    <img src="screenshots/waveboard-03-components.jpg" width="1400" height="1050" loading="lazy" alt="The Add component panel listing inputs: touch pad, keyboard, sequencer, trigger pad, slider, switch, button, number box, and sensors.">
-                    <img src="screenshots/waveboard-04-instruments.jpg" width="1400" height="1050" loading="lazy" alt="The Load instrument dialog showing built-in instruments including Autoharpsichord, Ballpark Organ, Blueberry Pad, and Bubble Warp.">
-                </div>
-            </section>
-            <section>
-                <h2>Manual</h2>
-                <p>The full Waveboard manual — every component, the wiring model, and the song recorder — is here.</p>
-                <a class="button" href="waveboard-manual.pdf">Download the manual (PDF)</a>
-            </section>
-            <section>
-                <h2>Support</h2>
-                <p>Found a bug, want a component that doesn’t exist yet, or need a hand with a patch? Get in touch and I’ll get back to you.</p>
-                <a class="button" href="mailto:lukebradfordapps@gmail.com?subject=Waveboard">Contact support</a>
-            </section>
-            <section>
-                <h2>Privacy</h2>
-                <p>Waveboard collects no data at all — no accounts, no analytics, no tracking, and no third-party SDKs. Read the full <a href="privacy/">privacy policy</a>.</p>
-            </section>
-        </main>
-        <footer>
-            <a href="https://apps.apple.com/us/app/waveboard/id544597426">App Store</a> &nbsp;·&nbsp; <a href="privacy/">Privacy policy</a> &nbsp;·&nbsp; <a href="mailto:lukebradfordapps@gmail.com?subject=Waveboard">Support</a> &nbsp;·&nbsp; &copy; 2026 <a href="https://apps.apple.com/us/developer/luke-bradford/id326971268">Luke Bradford</a>. All rights reserved.
-        </footer>
-    </body>
+function wbStoreLink(search) { return WB_STORE_BASE + wbCampaign(search); }
+
+// iPadOS Safari reports itself as a Mac ("Macintosh" + touch), so an iPad is never a phone here.
+function wbIsPhone(ua, maxTouchPoints) {
+  ua = ua || "";
+  if (/iPad/.test(ua)) return false;
+  if (/Macintosh/.test(ua) && maxTouchPoints > 1) return false;
+  return /iPhone|iPod|Windows Phone|Android.*Mobile|Mobile.*Firefox/i.test(ua);
+}
+
+function wbMailto(link) {
+  return "mailto:?subject=" + encodeURIComponent("Waveboard, for my iPad") +
+         "&body=" + encodeURIComponent("Open this on the iPad:\n" + link);
+}
+
+if (typeof document !== "undefined") {
+  (function () {
+    var link = wbStoreLink(location.search);
+    var as = document.querySelectorAll("a[data-store]");
+    for (var i = 0; i < as.length; i++) as[i].href = link;
+
+    if (!wbIsPhone(navigator.userAgent, navigator.maxTouchPoints || 0)) return;
+    document.documentElement.classList.add("is-phone");
+
+    var mail = document.getElementById("send-mail");
+    if (mail) mail.href = wbMailto(link);
+
+    var share = document.getElementById("send-share");
+    if (share) {
+      if (navigator.share) {
+        share.hidden = false;
+        share.addEventListener("click", function () {
+          navigator.share({ title: "Waveboard for iPad",
+                            text: "Waveboard: strange, lovely instruments for iPad. Free to try.",
+                            url: link }).catch(function () {});
+        });
+      }
+    }
+
+    var copy = document.getElementById("send-copy");
+    if (copy && navigator.clipboard) {
+      copy.hidden = false;
+      copy.addEventListener("click", function () {
+        navigator.clipboard.writeText(link).then(function () {
+          copy.textContent = "Link copied";
+        }, function () {});
+      });
+    }
+  })();
+}
+
+if (typeof module !== "undefined") {
+  module.exports = { wbCampaign: wbCampaign, wbStoreLink: wbStoreLink,
+                     wbIsPhone: wbIsPhone, wbMailto: wbMailto };
+}
+</script>
+</body>
 </html>
